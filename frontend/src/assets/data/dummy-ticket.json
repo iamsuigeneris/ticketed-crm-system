@@ -3,7 +3,24 @@
     "id": 1,
     "subject": "BRT ticket to Ajah",
     "status": "Pending",
-    "addedAt": "2021-03-24"
+    "addedAt": "2021-03-24",
+    "history":[
+      {
+        "date":"20-10-10",
+        "message":"this is where i have to be",
+        "client":"client"
+      },
+            {
+        "date":"20-09-09",
+        "message":"please stay here",
+        "client":"operator"
+      },
+            {
+        "date":"20-11-03",
+        "message":"i want to sleep",
+        "client":"client"
+      }
+    ]
   },
   {
     "id": 2,
