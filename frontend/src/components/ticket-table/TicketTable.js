@@ -1,5 +1,7 @@
 import React from 'react'
-import { Table } from 'react-bootstrap'
+import {Table } from 'react-bootstrap'
+import {Link} from 'react-router-dom'
+
 const TicketTable = ({tickets}) => {
     return (
         <Table striped bordered hover>
@@ -15,8 +17,12 @@ const TicketTable = ({tickets}) => {
                 {tickets.length ? (
                     tickets.map((row) =>
                         (<tr key={row.id}>
-                            <td>{row.id}</td>
-                            <td>{row.subject}</td>
+                        <td>{row.id}</td>
+                        <td>
+                            <Link to={`/ticket/${row.id}`} style={{ textDecoration: "none" }}>
+                                {row.subject}
+                            </Link>
+                        </td>
                             <td>{row.status }</td>
                             <td>{row.addedAt}</td>
                         </tr>))

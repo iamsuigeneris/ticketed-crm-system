@@ -1,8 +1,14 @@
 import React from 'react'
 import { Navbar, Nav,Container } from 'react-bootstrap'
 import logo from '../../assets/image/logo.png'
+import { useHistory } from 'react-router-dom'
+import {LinkContainer} from 'react-router-bootstrap'
 
 const Header = () => {
+    const history = useHistory()
+    const logMeOut = () => {
+        history.push("/")
+    }
     return (
         <Navbar collapseOnSelect bg="info" variant="dark" expand="md">
             <Container>
@@ -12,9 +18,9 @@ const Header = () => {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
                 <Nav>
-                    <Nav.Link href="/dashboad">Dashboad</Nav.Link>
-                    <Nav.Link href="/dashboad">Ticket</Nav.Link>
-                    <Nav.Link href="/dashboad">Logout</Nav.Link>
+                    <LinkContainer to="/dashboard"><Nav.Link>Dashboard</Nav.Link></LinkContainer>
+                    <LinkContainer to="/tickets"><Nav.Link>Tickets</Nav.Link></LinkContainer>
+                    <Nav.Link onClick={logMeOut}>Logout</Nav.Link>
                 </Nav>
                 </Navbar.Collapse>
             </Container>
