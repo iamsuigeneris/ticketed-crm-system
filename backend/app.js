@@ -12,7 +12,7 @@ const handleError = require("./utils/errorHandler")
 const app = express()
 
 // API security
-app.use(helmet())
+// app.use(helmet())
 
 //handle CORS error
 app.use(cors())
@@ -26,7 +26,7 @@ app.use(bodyParser.json())
 // MongoDB connnection setup
 const mongoose = require("mongoose")
 
-mongoose.connect(, {
+mongoose.connect("mongodb+srv://iamsuigeneris:Iamsuigeneris1234@cluster0.orkfk.mongodb.net/crm-ticket-system?retryWrites=true&w=majority", {
     useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify: false,
