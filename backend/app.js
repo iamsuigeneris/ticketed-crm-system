@@ -1,7 +1,7 @@
 const express = require("express")
 const bodyParser = require("body-parser")
 const cors = require("cors")
-const helmet = require("helmet")
+// const helmet = require("helmet")
 const morgan = require("morgan")
 const dotenv = require('dotenv')
 const userRouter = require("./routers/users")
@@ -26,7 +26,7 @@ app.use(bodyParser.json())
 // MongoDB connnection setup
 const mongoose = require("mongoose")
 
-mongoose.connect("mongodb+srv://iamsuigeneris:Iamsuigeneris1234@cluster0.orkfk.mongodb.net/crm-ticket-system?retryWrites=true&w=majority", {
+mongoose.connect(process.env.MONGODB, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify: false,
