@@ -13,8 +13,6 @@ const createAccessJWT = async (email,_id) => {
     } catch (error) {
         return Promise.reject(error)
     }
-
-
 }
 
 const createRefreshJWT = async (email, _id) => {
@@ -27,9 +25,15 @@ const createRefreshJWT = async (email, _id) => {
     } catch (error) {
         return Promise.reject(error)
     }
+}
 
- 
+const verifyAccessJWT = (userJWT) => {
+    try {
+        return Promise.resolve(jwt.verify(userJWT, process.env.JWT_ACCESS))
+    } catch (error) {
+        return Promise.reject(error)
+    }
 }
  
 
-module.exports = {createAccessJWT,createRefreshJWT}
+module.exports = { createAccessJWT, createRefreshJWT, verifyAccessJWT}

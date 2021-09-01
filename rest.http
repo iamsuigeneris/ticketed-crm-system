@@ -19,3 +19,8 @@ Content-Type: application/json
 	"email":"lanre@lanre.com",
 	"password":"123456$$$"
 }
+
+### Get A user profile
+GET http://localhost:3001/v1/user
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxhbnJlQGxhbnJlLmNvbSIsImlhdCI6MTYzMDQ2MzEwMiwiZXhwIjoxNjMwNDY0MDAyfQ.eK358yNoVQeWCOJkzY9XOjKBdTl1AdWSJrRRKtpfICY
+

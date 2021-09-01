@@ -22,7 +22,7 @@ const setJWT = (key, value) => {
 const getJWT = (key) => {
     return new Promise((resolve, reject) => {
         try {
-            client.get("key", (err, res) => {
+            client.get(key, (err, res) => {
                 if (err) reject(err)
                 resolve(res)
             })
