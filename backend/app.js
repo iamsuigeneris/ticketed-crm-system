@@ -6,6 +6,7 @@ const morgan = require("morgan")
 const dotenv = require('dotenv')
 const userRouter = require("./routers/users")
 const ticketRouter = require("./routers/tickets")
+const tokensRouter = require("./routers/tokens")
 const handleError = require("./utils/errorHandler")
 
 
@@ -48,6 +49,7 @@ if (process.env.NODE_ENV !== "production") {
 // use Routers
 app.use("/v1/user", userRouter)
 app.use("/v1/ticket", ticketRouter)
+app.use("/v1/tokens", tokensRouter)
 
 app.use((req, res, next) => {
     const error = new Error("Resources not found")

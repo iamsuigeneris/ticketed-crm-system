@@ -33,4 +33,12 @@ const getJWT = (key) => {
     })
 }
 
-module.exports = {setJWT,getJWT}
+const deleteJWT = key => {
+    try {
+        client.del(key)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+module.exports = {setJWT,getJWT,deleteJWT}

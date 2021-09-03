@@ -34,6 +34,14 @@ const verifyAccessJWT = (userJWT) => {
         return Promise.reject(error)
     }
 }
+
+const verifyRefreshJWT = (userJWT) => {
+    try {
+        return Promise.resolve(jwt.verify(userJWT, process.env.JWT_REFRESH))
+    } catch (error) {
+        return Promise.reject(error)
+    }
+}
  
 
-module.exports = { createAccessJWT, createRefreshJWT, verifyAccessJWT}
+module.exports = { createAccessJWT, createRefreshJWT, verifyAccessJWT, verifyRefreshJWT}

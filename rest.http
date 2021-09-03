@@ -24,3 +24,7 @@ Content-Type: application/json
 GET http://localhost:3001/v1/user
 Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxhbnJlQGxhbnJlLmNvbSIsImlhdCI6MTYzMDQ2MzEwMiwiZXhwIjoxNjMwNDY0MDAyfQ.eK358yNoVQeWCOJkzY9XOjKBdTl1AdWSJrRRKtpfICY
 
+### GET refreshed token
+
+GET http://localhost:3001/v1/tokens
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxhbnJlQGxhbnJlLmNvbSIsImlhdCI6MTYzMDY0MTczMiwiZXhwIjoxNjMzMjMzNzMyfQ.HxtQQN_iW4E0AveXtGzVhDYOi4OgEae5x-Q6hEC_eMI
