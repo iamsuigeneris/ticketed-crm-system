@@ -28,3 +28,12 @@ Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxhbnJlQGxhbnJlL
 
 GET http://localhost:3001/v1/tokens
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxhbnJlQGxhbnJlLmNvbSIsImlhdCI6MTYzMDY0MTczMiwiZXhwIjoxNjMzMjMzNzMyfQ.HxtQQN_iW4E0AveXtGzVhDYOi4OgEae5x-Q6hEC_eMI
+
+### Password reset endpoints
+POST http://localhost:3001/v1/user/reset-password
+Content-Type: application/json
+
+{
+	"email":"lanre@lanre.com"
+	
+}
