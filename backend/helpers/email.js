@@ -4,8 +4,8 @@ const transporter = nodemailer.createTransport({
     host: 'smtp.ethereal.email',
     port: 587,
     auth: {
-        user: 'emmy.howe68@ethereal.email',
-        pass: '2TZd4d4jd94RUkdhZk'
+        user: 'dessie.schmitt@ethereal.email',
+        pass: '25YVThEdhnmMzUJBRv'
     }
 });
 
@@ -28,19 +28,40 @@ const send = (info) => {
         }
     })
 }
-const emailProcessor = (email,pin) => {
-    const info = {
-        from: '"CRM Company" <emmy.howe68@ethereal.email>', // sender address
-        to: email, // list of receivers
-        subject: "Password reset PIN", // Subject line
-        text: "Kindly accept your pin" + pin + " This pin will expire in 1day ", // plain text body
-        html: `<b>Hello </b>
-        Here is your pin
-        <b>${pin}</b>
-        This pin will expire in 1day
-        <p></p>`,
-    }
-    send(info)
+const emailProcessor = (email, pin, type) => {
+    let info = ""
+    switch (type) {
+        case "request-new-password":
+            info = {
+                from: '"CRM Company" <dessie.schmitt@ethereal.email>', // sender address
+                to: email, // list of receivers
+                subject: "Password reset PIN", // Subject line
+                text: "Kindly accept your pin" + pin + " This pin will expire in 1day ", // plain text body
+                html: `<b>Hello </b>
+                    Here is your pin
+                    <b>${pin}</b>
+                    This pin will expire in 1day
+                    <p></p>`,
+            }
+            send(info)
+            break
+        
+        case "update-password-success":
+            info = {
+                from: '"CRM Company" <dessie.schmitt@ethereal.email>', // sender address
+                to: email, // list of receivers
+                subject: "Password Updated", // Subject line
+                text: "Your new password has been updated", // plain text body
+                html: `<b>Hello </b>
+
+                    <p>Your new password has been updated</p>`,
+            }
+            send(info)
+            break
+        
+        default:
+            break
+    }   
 }
 
 module.exports = {emailProcessor}

@@ -17,7 +17,7 @@ Content-Type: application/json
 
 {
 	"email":"lanre@lanre.com",
-	"password":"123456$$$"
+	"password":"password1"
 }
 
 ### Get A user profile
@@ -34,6 +34,16 @@ POST http://localhost:3001/v1/user/reset-password
 Content-Type: application/json
 
 {
-	"email":"lanre@lanre.com"
-	
+	"email":"lanre@lanre.com"	
+}
+
+### Update New Password
+
+PATCH http://localhost:3001/v1/user/reset-password
+Content-Type: application/json
+
+{
+	"email":"lanre@lanre.com",
+    "pin":468818,
+    "newPassword":"password1"
 }
