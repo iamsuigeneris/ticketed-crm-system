@@ -51,3 +51,13 @@ Content-Type: application/json
 ### user logout end
 DELETE http://localhost:3001/v1/user/logout
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxhbnJlQGxhbnJlLmNvbSIsImlhdCI6MTYzMDk1NDMxMiwiZXhwIjoxNjMwOTU1MjEyfQ.PcGt0r1bQEG3Zy8p7BOxeuEyTDqth8bkZO7YKXye5Dc
+
+
+
+### Create a new ticket
+POST http://localhost:3001/v1/ticket
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxhbnJlQGxhbnJlLmNvbSIsImlhdCI6MTYzMTAzNTgwMCwiZXhwIjoxNjMxMDM2NzAwfQ.wWuxTfACMsznJ2d2o9IAPpcxbXwAWZ6tiYPw-iPfdhg
+
+### Get tickets for a specific user
+GET http://localhost:3001/v1/ticket
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxhbnJlQGxhbnJlLmNvbSIsImlhdCI6MTYzMTAzNjcwMiwiZXhwIjoxNjMxMDM3NjAyfQ.DZIvmoECh4fMmfDhMBdd9dlgk5V4fY29BPCDIn1lezM
