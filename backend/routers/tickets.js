@@ -1,6 +1,6 @@
 const express = require("express")
 const router = express.Router()
-const { insertTicket,getTickets} = require("../model/ticket/TicketModel")
+const { insertTicket, getTickets, getTicketById} = require("../model/ticket/TicketModel")
 const {userAuthorization} = require("../middlewares/authorization")
 
 router.all("/", (req, res, next) => {
@@ -50,6 +50,31 @@ router.get("/", userAuthorization, async (req, res) => {
         const userId = req.userId
 
         const result = await getTickets(userId)
+
+        console.log(result)
+       
+            res.json({
+                status: "success",
+                result
+            })
+        
+    } catch (error) {
+        res.json({
+            status: "error",
+            message: error.message
+        })
+    }
+})
+
+// Get a particular ticket
+router.get("/:_id", userAuthorization, async (req, res) => {
+ 
+    try {
+        const { _id } = req.params
+
+        const clientId = req.userId
+
+        const result = await getTicketById(_id, clientId)
 
         console.log(result)
        

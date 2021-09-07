@@ -61,3 +61,10 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxhbnJlQGxhbnJl
 ### Get tickets for a specific user
 GET http://localhost:3001/v1/ticket
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxhbnJlQGxhbnJlLmNvbSIsImlhdCI6MTYzMTAzNjcwMiwiZXhwIjoxNjMxMDM3NjAyfQ.DZIvmoECh4fMmfDhMBdd9dlgk5V4fY29BPCDIn1lezM
+
+
+### Get specific ticket
+GET http://localhost:3001/v1/ticket/6137a53b685cb41e20eda5e7
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxhbnJlQGxhbnJlLmNvbSIsImlhdCI6MTYzMTA0MzE4OSwiZXhwIjoxNjMxMDQ0MDg5fQ.qjHJmyEMsOI4m0QNOHgrNe_XZUzPxgNoekAxpSX11FE
+
+
