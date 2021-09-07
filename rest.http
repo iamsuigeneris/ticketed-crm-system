@@ -38,7 +38,6 @@ Content-Type: application/json
 }
 
 ### Update New Password
-
 PATCH http://localhost:3001/v1/user/reset-password
 Content-Type: application/json
 
@@ -47,3 +46,8 @@ Content-Type: application/json
     "pin":468818,
     "newPassword":"password1"
 }
+
+
+### user logout end
+DELETE http://localhost:3001/v1/user/logout
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxhbnJlQGxhbnJlLmNvbSIsImlhdCI6MTYzMDk1NDMxMiwiZXhwIjoxNjMwOTU1MjEyfQ.PcGt0r1bQEG3Zy8p7BOxeuEyTDqth8bkZO7YKXye5Dc
