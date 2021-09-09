@@ -1,6 +1,6 @@
 const express = require("express")
 const router = express.Router()
-const { insertTicket, getTickets, getTicketById, updateClientReply, updateStatusToClose} = require("../model/ticket/TicketModel")
+const { insertTicket, getTickets, getTicketById, updateClientReply, updateStatusToClose, deleteTicket} = require("../model/ticket/TicketModel")
 const {userAuthorization} = require("../middlewares/authorization")
 
 router.all("/", (req, res, next) => {
@@ -144,6 +144,26 @@ router.patch("/close-ticket/:_id", userAuthorization, async (req, res) => {
     }
 })
 
+// Delete ticket
+router.delete("/close-ticket/:_id", userAuthorization, async (req, res) => {
+    try {
+
+        const { _id } = req.params
+        const clientId = req.userId
+
+        const result = await deleteTicket({ _id, clientId })
+
+            return res.json({
+                status: "success",
+                message: "The ticket has been deleted"
+            })
+    } catch (error) {
+        res.json({
+            status: "error",
+            message: error.message
+        })
+    }
+})
 
 
 

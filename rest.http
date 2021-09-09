@@ -91,3 +91,8 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxhbnJlQGxhbnJl
 Content-Type: application/json
 
 
+### delete ticket
+DELETE  http://localhost:3001/v1/ticket/close-ticket/6137959fe63d4439785011d7
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxhbnJlQGxhbnJlLmNvbSIsImlhdCI6MTYzMTE2MjIzMywiZXhwIjoxNjMxMTYzMTMzfQ.azkbmsLf-uXHsnhsTNPsCq0cjkrFe4lUAVBo7FvXhM4
+
+Content-Type: application/json
