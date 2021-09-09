@@ -33,7 +33,7 @@ const TicketSchema = new Schema({
             },
             message: {
                 type: String,
-                maxlength: 100,
+                maxlength: 1000,
                 required: true,
                 default:""
             },

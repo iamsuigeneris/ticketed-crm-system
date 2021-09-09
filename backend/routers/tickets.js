@@ -1,6 +1,6 @@
 const express = require("express")
 const router = express.Router()
-const { insertTicket, getTickets, getTicketById} = require("../model/ticket/TicketModel")
+const { insertTicket, getTickets, getTicketById, updateClientReply, updateStatusToClose} = require("../model/ticket/TicketModel")
 const {userAuthorization} = require("../middlewares/authorization")
 
 router.all("/", (req, res, next) => {
@@ -77,7 +77,6 @@ router.get("/:_id", userAuthorization, async (req, res) => {
         const result = await getTicketById(_id, clientId)
 
         console.log(result)
-       
             res.json({
                 status: "success",
                 result
@@ -90,5 +89,63 @@ router.get("/:_id", userAuthorization, async (req, res) => {
         })
     }
 })
+
+// Update reply message from client
+router.put("/:_id", userAuthorization, async (req, res) => {
+    try {
+        const {message,sender} = req.body 
+        const { _id } = req.params 
+        const clientId = req.userId
+
+        const result = await updateClientReply({ _id, message, sender })
+        
+        if (result._id) {
+            return res.json({
+                status: "success",
+                message:"your message updated"
+            })
+        }
+        res.json({
+            status:"error",
+            message:"Unable to update your message please try again later"
+        })
+    } catch (error) {
+        res.json({
+            status: "error",
+            message: error.message
+        })
+    }
+})
+
+// update ticket status to close
+router.patch("/close-ticket/:_id", userAuthorization, async (req, res) => {
+    try {
+       
+        const { _id } = req.params
+        const clientId = req.userId
+
+        const result = await updateStatusToClose({ _id, clientId })
+
+        if (result._id) {
+            return res.json({
+                status: "success",
+                message: "The ticket has been successfully closed"
+            })
+        }
+        res.json({
+            status: "error",
+            message: "Unable to close ticket"
+        })
+    } catch (error) {
+        res.json({
+            status: "error",
+            message: error.message
+        })
+    }
+})
+
+
+
+
 
 module.exports = router
