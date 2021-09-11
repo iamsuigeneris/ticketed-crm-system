@@ -1,7 +1,8 @@
 const express = require("express")
 const router = express.Router()
 const { insertTicket, getTickets, getTicketById, updateClientReply, updateStatusToClose, deleteTicket} = require("../model/ticket/TicketModel")
-const {userAuthorization} = require("../middlewares/authorization")
+const { userAuthorization } = require("../middlewares/authorization")
+const { createNewTicketValidation, replyTicketMessageValidation } = require("../middlewares/formValidation")
 
 router.all("/", (req, res, next) => {
     // res.json({ message: "return from ticket router" })
@@ -9,7 +10,8 @@ router.all("/", (req, res, next) => {
     next()
 })
 
-router.post("/", userAuthorization, async (req, res) => {
+// create new ticket
+router.post("/", createNewTicketValidation, userAuthorization, async (req, res) => {
 
     try {
         const { subject, sender, message } = req.body
@@ -91,7 +93,7 @@ router.get("/:_id", userAuthorization, async (req, res) => {
 })
 
 // Update reply message from client
-router.put("/:_id", userAuthorization, async (req, res) => {
+router.put("/:_id", replyTicketMessageValidation, userAuthorization, async (req, res) => {
     try {
         const {message,sender} = req.body 
         const { _id } = req.params 
@@ -145,7 +147,7 @@ router.patch("/close-ticket/:_id", userAuthorization, async (req, res) => {
 })
 
 // Delete ticket
-router.delete("/close-ticket/:_id", userAuthorization, async (req, res) => {
+router.delete("/:_id", userAuthorization, async (req, res) => {
     try {
 
         const { _id } = req.params

@@ -56,11 +56,11 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxhbnJlQGxhbnJl
 
 ### Create a new ticket
 POST http://localhost:3001/v1/ticket
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxhbnJlQGxhbnJlLmNvbSIsImlhdCI6MTYzMTA3MDUxOCwiZXhwIjoxNjMxMDcxNDE4fQ.tdLfqxBwqbjfcyI1FEN0aFzQLye9SGDIlAANtGjifC4
-
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxhbnJlQGxhbnJlLmNvbSIsImlhdCI6MTYzMTM2Nzg0MCwiZXhwIjoxNjMxMzY4NzQwfQ.C9dfog7244iZIk6_j0lYyjnDXdnQZ_xC6UOshhAa8UA
 Content-Type: application/json
+
 {
-	"subject":"BRT Bus Delay",
+	"subject":"Another BRT Bus Delay",
 	"sender":"Lanre",
 	"message":"Kindly provide buses for us here in oshodi"
 }
@@ -75,8 +75,8 @@ GET http://localhost:3001/v1/ticket/6137a53b685cb41e20eda5e7
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxhbnJlQGxhbnJlLmNvbSIsImlhdCI6MTYzMTA0MzE4OSwiZXhwIjoxNjMxMDQ0MDg5fQ.qjHJmyEMsOI4m0QNOHgrNe_XZUzPxgNoekAxpSX11FE
 
 ### Update a ticket
-PUT http://localhost:3001/v1/ticket/6137959fe63d4439785011d7
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxhbnJlQGxhbnJlLmNvbSIsImlhdCI6MTYzMTA3Mjk2MywiZXhwIjoxNjMxMDczODYzfQ.fw0ECTAJe9PYfYqv0CT5CsSAl7tEB8t_bhCtExjbfbU
+PUT http://localhost:3001/v1/ticket/6138299093e013239805fe96
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxhbnJlQGxhbnJlLmNvbSIsImlhdCI6MTYzMTM3MTI4NiwiZXhwIjoxNjMxMzcyMTg2fQ.XOLsdbDfbRnc5G50wnwDIAjOdPFdFZy0g4bvm3CQfco
 Content-Type: application/json
 
 {
@@ -92,7 +92,7 @@ Content-Type: application/json
 
 
 ### delete ticket
-DELETE  http://localhost:3001/v1/ticket/close-ticket/6137959fe63d4439785011d7
+DELETE  http://localhost:3001/v1/ticket/6137959fe63d4439785011d7
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxhbnJlQGxhbnJlLmNvbSIsImlhdCI6MTYzMTE2MjIzMywiZXhwIjoxNjMxMTYzMTMzfQ.azkbmsLf-uXHsnhsTNPsCq0cjkrFe4lUAVBo7FvXhM4
 
 Content-Type: application/json
