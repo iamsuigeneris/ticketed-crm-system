@@ -22,12 +22,12 @@ Content-Type: application/json
 
 ### Get A user profile
 GET http://localhost:3001/v1/user
-Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxhbnJlQGxhbnJlLmNvbSIsImlhdCI6MTYzMDQ2MzEwMiwiZXhwIjoxNjMwNDY0MDAyfQ.eK358yNoVQeWCOJkzY9XOjKBdTl1AdWSJrRRKtpfICY
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxhbnJlQGxhbnJlLmNvbSIsImlhdCI6MTYzMjA0NDc3MSwiZXhwIjoxNjMyMDQ1NjcxfQ.kfdP4jR1sNyH9pQUCcvLjbFZg6Tro74YPZfKl3Os2GI
 
 ### GET refreshed token
 
 GET http://localhost:3001/v1/tokens
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxhbnJlQGxhbnJlLmNvbSIsImlhdCI6MTYzMDY0MTczMiwiZXhwIjoxNjMzMjMzNzMyfQ.HxtQQN_iW4E0AveXtGzVhDYOi4OgEae5x-Q6hEC_eMI
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxhbnJlQGxhbnJlLmNvbSIsImlhdCI6MTYzMjAxOTAyMSwiZXhwIjoxNjM0NjExMDIxfQ.3geW2K1MYWHW7Cu37jg2JV0fAyfnJWJvI6PQukOrpJU
 
 ### Password reset endpoints
 POST http://localhost:3001/v1/user/reset-password
@@ -56,18 +56,18 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxhbnJlQGxhbnJl
 
 ### Create a new ticket
 POST http://localhost:3001/v1/ticket
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxhbnJlQGxhbnJlLmNvbSIsImlhdCI6MTYzMTM2Nzg0MCwiZXhwIjoxNjMxMzY4NzQwfQ.C9dfog7244iZIk6_j0lYyjnDXdnQZ_xC6UOshhAa8UA
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxhbnJlQGxhbnJlLmNvbSIsImlhdCI6MTYzMTc0Mjg4MywiZXhwIjoxNjMxNzQzNzgzfQ.YGkiigiY7kkDgshUlcNFaBEux7bEAgz03ssfCJnhSLM
 Content-Type: application/json
 
 {
-	"subject":"Another BRT Bus Delay",
+	"subject":"Failed web transaction",
 	"sender":"Lanre",
-	"message":"Kindly provide buses for us here in oshodi"
+	"message":"i am yet to get refund please"
 }
 
 ### Get tickets for a specific user
 GET http://localhost:3001/v1/ticket
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxhbnJlQGxhbnJlLmNvbSIsImlhdCI6MTYzMTAzNjcwMiwiZXhwIjoxNjMxMDM3NjAyfQ.DZIvmoECh4fMmfDhMBdd9dlgk5V4fY29BPCDIn1lezM
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxhbnJlQGxhbnJlLmNvbSIsImlhdCI6MTYzMTc0Mjg4MywiZXhwIjoxNjMxNzQzNzgzfQ.YGkiigiY7kkDgshUlcNFaBEux7bEAgz03ssfCJnhSLM
 
 
 ### Get specific ticket
@@ -87,12 +87,10 @@ Content-Type: application/json
 ### Update ticket to close 
 PATCH http://localhost:3001/v1/ticket/close-ticket/6137959fe63d4439785011d7
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxhbnJlQGxhbnJlLmNvbSIsImlhdCI6MTYzMTE2MDc1NiwiZXhwIjoxNjMxMTYxNjU2fQ.7g1P_lReJ78Hr3s7iWJcIJ252fsqQUuG19gV_oPjOak
-
 Content-Type: application/json
 
 
 ### delete ticket
 DELETE  http://localhost:3001/v1/ticket/6137959fe63d4439785011d7
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxhbnJlQGxhbnJlLmNvbSIsImlhdCI6MTYzMTE2MjIzMywiZXhwIjoxNjMxMTYzMTMzfQ.azkbmsLf-uXHsnhsTNPsCq0cjkrFe4lUAVBo7FvXhM4
-
 Content-Type: application/json
