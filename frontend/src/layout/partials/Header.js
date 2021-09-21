@@ -5,7 +5,10 @@ import { useHistory } from 'react-router-dom'
 import {LinkContainer} from 'react-router-bootstrap'
 
 const Header = () => {
+   
     const history = useHistory()
+    
+    sessionStorage.removeItem("accessJWT")
     const logMeOut = () => {
         history.push("/")
     }

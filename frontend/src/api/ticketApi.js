@@ -7,7 +7,7 @@ export const getAllTickets = () => {
                 'http://localhost:3001/v1/ticket',
                 {
                     headers: {
-                        Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxhbnJlQGxhbnJlLmNvbSIsImlhdCI6MTYzMjA1MzU0OCwiZXhwIjoxNjMyMDU0NDQ4fQ.WYbTSZU2LVQyaFQ1lYEI_hfkPYTLXuFZMusTebd-uwA",
+                        Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxhbnJlQGxhbnJlLmNvbSIsImlhdCI6MTYzMjE5MjI3MSwiZXhwIjoxNjMyMTkzMTcxfQ.yq84kaUVl6ixSqAL5UIMnhOcTnZvgQkVuVYsDWJSE1s",
                     }
                 }
             )

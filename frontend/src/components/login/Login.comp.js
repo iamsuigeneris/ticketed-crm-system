@@ -1,8 +1,55 @@
-import React from 'react'
+import React,{useState} from 'react'
 import PropTypes from 'prop-types'
-import {Container,Row,Col,Form,Button} from 'react-bootstrap'
+import { Container, Row, Col, Form, Button, Spinner,Alert } from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
+import {useHistory} from "react-router-dom"
+import { loginPending, loginSuccess, loginFail } from './loginSlice'
+import { userLogin } from '../../api/userApi'
+import { getUserProfile } from "../../page/dashboard/userAction"
 
-const LoginForm = ({handleOnChange,handleOnSubmit, email, password, formSwitcher}) => {
+const LoginForm = ({ formSwitcher }) => {
+    const dispatch = useDispatch()
+    const history = useHistory()
+    const {isLoading,isAuth, error} = useSelector( state => state.login)
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+
+    const handleOnChange = e => {
+        const { name, value } = e.target
+
+        switch (name) {
+            case 'email':
+                setEmail(value)
+                break
+            case 'password':
+                setPassword(value)
+                break
+
+            default:
+                break
+        }
+    }
+    const handleOnSubmit = async (e) => {
+        e.preventDefault()
+
+        if (!email || !password) {
+            return alert("Fill up all the form")
+        }
+        dispatch(loginPending())
+
+        try {
+            const isAuth = await userLogin({ email, password })
+
+            if (isAuth.state === "error") {
+                dispatch(loginFail(isAuth.message))
+            }
+            dispatch(loginSuccess())
+            dispatch(getUserProfile())
+            history.push('/dashboard')
+        } catch (error) {
+            dispatch(loginFail(error.message))
+        }
+    }
 
     return (
         <Container>
@@ -10,6 +57,7 @@ const LoginForm = ({handleOnChange,handleOnSubmit, email, password, formSwitcher
                 <Col>
                     <h1 className="text-info text-center">Client Login</h1>
                     <hr />
+                    {error && <Alert variant="danger">{error}</Alert>}
                     <Form autoComplete="off" onSubmit={handleOnSubmit}>
                         <Form.Group className="mb-3">
                             <Form.Label>Email Address</Form.Label>
@@ -35,6 +83,7 @@ const LoginForm = ({handleOnChange,handleOnSubmit, email, password, formSwitcher
                         </Form.Group>
                         {' '}
                         <Button type="submit" variant="primary" className="mt-3">Login</Button>
+                        {isLoading && <Spinner variant="primary" animation="border"  />}
                     </Form>
                     <hr />
                 </Col>
@@ -49,10 +98,6 @@ const LoginForm = ({handleOnChange,handleOnSubmit, email, password, formSwitcher
 }
 
 LoginForm.propTypes = {
-    handleOnChange: PropTypes.func.isRequired,
-    handleOnSubmit: PropTypes.func.isRequired,
     formSwitcher: PropTypes.func.isRequired,
-    email: PropTypes.string.isRequired,
-    password: PropTypes.string.isRequired
 }
 export default LoginForm
