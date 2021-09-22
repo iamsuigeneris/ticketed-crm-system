@@ -3,7 +3,7 @@ import { Navbar, Nav,Container } from 'react-bootstrap'
 import logo from '../../assets/image/logo.png'
 import { useHistory } from 'react-router-dom'
 import { LinkContainer } from 'react-router-bootstrap'
-import {userLogout} from "react-router-bootstrap"
+import {userLogout} from "../../api/userApi"
 
 const Header = () => {
     const history = useHistory()
