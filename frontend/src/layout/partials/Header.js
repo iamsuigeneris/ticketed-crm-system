@@ -2,14 +2,16 @@ import React from 'react'
 import { Navbar, Nav,Container } from 'react-bootstrap'
 import logo from '../../assets/image/logo.png'
 import { useHistory } from 'react-router-dom'
-import {LinkContainer} from 'react-router-bootstrap'
+import { LinkContainer } from 'react-router-bootstrap'
+import {userLogout} from "react-router-bootstrap"
 
 const Header = () => {
-   
     const history = useHistory()
-    
-    sessionStorage.removeItem("accessJWT")
+
     const logMeOut = () => {
+        sessionStorage.removeItem("accessJWT")
+        localStorage.removeItem("crmSite")
+        userLogout()
         history.push("/")
     }
     return (
