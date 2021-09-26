@@ -4,7 +4,9 @@ const initialState = {
     tickets: [],
     isLoading: false,
     error:'',
-    searchTicketList:[]
+    searchTicketList: [],
+    selectedTicket: {},
+    replyMsg:""
 }
 
 const ticketListSlice = createSlice({
@@ -29,12 +31,48 @@ const ticketListSlice = createSlice({
                 if(!payload) return row
                 return row.subject.toLowerCase().includes(payload.toLowerCase())
             })
-        }
+        },
+        fetchSingleTicketLoading: (state) => {
+            state.isLoading = true
+        },
+        fetchSingleTicketSuccess: (state, {payload}) => {
+            state.selectedTicket = payload
+            state.isLoading = false
+            state.error = ""
+        },
+        fetchSingleTicketFail: (state, { payload }) => {
+            state.isLoading = false
+            state.error = payload
+        },
+        replyTicketLoading: (state) => {
+            state.isLoading = true
+        },
+        replyTicketSuccess: (state,{payload}) => {
+            state.isLoading = false
+            state.error = ""
+            state.replyMsg = payload
+        },
+        replyTicketFail: (state, { payload }) => {
+            state.isLoading = false
+            state.error = payload
+        },
+        closeTicketLoading: (state) => {
+            state.isLoading = true
+        },
+        closeTicketSuccess: (state, { payload }) => {
+            state.isLoading = false
+            state.error = ""
+            state.replyMsg = payload
+        },
+        closeTicketFail: (state, { payload }) => {
+            state.isLoading = false
+            state.error = payload
+        },
     }
 })
 
 const { reducer, actions } = ticketListSlice
 
-export const { fetchTicketLoading, fetchTicketSuccess, fetchTicketFail, searchTickets } = actions
+export const {fetchTicketLoading, fetchTicketSuccess, fetchTicketFail, searchTickets, fetchSingleTicketLoading, fetchSingleTicketSuccess, fetchSingleTicketFail, replyTicketLoading, replyTicketSuccess, replyTicketFail, closeTicketLoading, closeTicketSuccess, closeTicketFail } = actions
 
 export default reducer

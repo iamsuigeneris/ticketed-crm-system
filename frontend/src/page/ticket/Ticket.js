@@ -1,33 +1,27 @@
-import React, { useEffect, useState } from 'react'
-import {Container,Row,Col,Button} from 'react-bootstrap'
+import React, { useEffect} from 'react'
+import {useDispatch,  useSelector} from "react-redux"
+import {Container,Row,Col,Button,Spinner,Alert} from 'react-bootstrap'
 import PageBreadcrumb from '../../components/breadcrumb/PageBreadcrumb'
-import tickets from '../../assets/data/dummy-ticket.json'
+// import tickets from '../../assets/data/dummy-selectedTicket.json'
 import MessageHistory from '../../components/message-history/MessageHistory'
 import UpdateTicket from '../../components/update-ticket/UpdateTicket'
-import {useParams} from 'react-router-dom'
+import { useParams } from 'react-router-dom'
+import { fetchSingleTicket,closeTicket } from "../ticket-listing/ticketsAction"
 
-const ticket = tickets[0] 
+// const selectedTicket = tickets[0] 
 
 const Ticket = () => {
-    const {tId} = useParams()
-    const [message, setMessage] = useState("")
-    const [ticket, setTicket] = useState("")
+    const { tId } = useParams()
+    const dispatch = useDispatch()
+    const { isLoading, error, selectedTicket } = useSelector(state => state.tickets)
+    const { replyMsg } = useSelector(state => state.tickets)
+    // const [message, setMessage] = useState("")
+    // const [ticket, setTicket] = useState("")
     
     useEffect(() => {
-        for (let i = 0; i < tickets.length; i++) {
-            if (tickets[i].id == tId) {
-                setTicket(tickets[i])
-                continue
-            }
-        }
-    }, [message,tId])
+        dispatch(fetchSingleTicket(tId))
+    }, [tId,dispatch])
     
-    const handleOnChange = e => {
-        setMessage(e.target.value)
-    }
-    const handleOnSubmit = () => {
-        alert("Form submitted")
-    }
     return (
         <Container>
             <Row>
@@ -36,28 +30,32 @@ const Ticket = () => {
                 </Col>
             </Row>
             <Row>
+                <Col>
+                   {isLoading && <Spinner variant="primary" animation="border" />}
+                    {error && <Alert variant="danger">{error}</Alert>}
+                    {replyMsg && <Alert variant="success"> {replyMsg}</Alert>}
+                </Col>
+            </Row>
+            <Row>
                 <Col className="text-weight-bolder text-secondary">
-                    <div className="Subject">Subject: {ticket.subject}</div>
-                    <div className="Date">Ticket Opened: {ticket.addedAt}</div>
-                    <div className="Status">Status: {ticket.status }</div>
+                    <div className="Subject">Subject: {selectedTicket.subject}</div>
+                    <div className="Date">Ticket Opened: {selectedTicket.openAt && new Date(selectedTicket.openAt).toLocaleString()}</div>
+                    <div className="Status">Status: {selectedTicket.status }</div>
                 </Col>
                 <Col className="text-right">
-                    <Button variant="outline-info">Close Ticket</Button>
+                    <Button variant="outline-info" onClick={() => dispatch(closeTicket(tId))} disabled={selectedTicket.status === "Closed"}>Close Ticket</Button>
                 </Col>
             </Row>
             <Row className="mt-4">
                 <Col>
-                    {ticket.history && <MessageHistory msg={ticket.history} />}
+                    {selectedTicket.conversations && <MessageHistory msg={selectedTicket.conversations} />}
                   
                 </Col>
             </Row>
             <hr />
             <Row className="mt-4">
                 <Col>
-                    <UpdateTicket msg={message}
-                        handleOnChange={handleOnChange}
-                        handleOnSubmit={handleOnSubmit}
-                    />
+                    <UpdateTicket _id={tId} />
                 </Col>
             </Row>
         </Container>
