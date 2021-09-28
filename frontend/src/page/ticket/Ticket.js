@@ -13,11 +13,8 @@ import { fetchSingleTicket,closeTicket } from "../ticket-listing/ticketsAction"
 const Ticket = () => {
     const { tId } = useParams()
     const dispatch = useDispatch()
-    const { isLoading, error, selectedTicket } = useSelector(state => state.tickets)
-    const { replyMsg } = useSelector(state => state.tickets)
-    // const [message, setMessage] = useState("")
-    // const [ticket, setTicket] = useState("")
-    
+    const { isLoading, error, selectedTicket, replyTicketError, replyMsg } = useSelector(state => state.tickets)
+ 
     useEffect(() => {
         dispatch(fetchSingleTicket(tId))
     }, [tId,dispatch])
@@ -33,6 +30,7 @@ const Ticket = () => {
                 <Col>
                    {isLoading && <Spinner variant="primary" animation="border" />}
                     {error && <Alert variant="danger">{error}</Alert>}
+                    {replyTicketError && <Alert variant="danger">{replyTicketError}</Alert>}
                     {replyMsg && <Alert variant="success"> {replyMsg}</Alert>}
                 </Col>
             </Row>

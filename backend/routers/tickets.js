@@ -30,7 +30,7 @@ router.post("/", createNewTicketValidation, userAuthorization, async (req, res) 
         }
         const result = await insertTicket(ticketObj)
         if (result._id) {
-            res.json({
+            return res.json({
                 status: "success",
                 message: "New ticket has been created!"
             })

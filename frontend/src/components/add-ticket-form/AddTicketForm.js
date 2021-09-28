@@ -1,14 +1,64 @@
-import React from 'react'
-import { Container, Button, Row, Col, Form } from 'react-bootstrap'
-import PropTypes from 'prop-types'
-// import { shortText } from '../../utils/Validation'
+import React, { useEffect, useState } from 'react'
+import { Container, Button, Row, Col, Form, Spinner,Alert } from 'react-bootstrap'
+import {useDispatch, useSelector} from 'react-redux'
+import { shortText } from '../../utils/Validation'
+import { openNewTicket } from './addTicketActions'
 import './addTicketForm.css'
 
-const AddTicketForm = ({ handleOnSubmit, handleOnChange, formData, formDataError }) => {
+const initialFormData = {
+    subject: "",
+    issueDate: "",
+    message: ""
+}
+const initialFormError = {
+    subject: false,
+    issueDate: false,
+    message: false
+}
+
+const AddTicketForm = () => {
+
+    const dispatch = useDispatch()
+ 
+    const {user:{name}} = useSelector(state => state.user)
+    const { isLoading, error, successMsg } = useSelector(state => state.openTicket)
+
+    const [formData, setFormData] = useState(initialFormData)
+    const [formDataError, setFormDataError] = useState(initialFormError)
+
+    useEffect(() => { }, [formData, formDataError])
+
+    const handleOnChange = e => {
+        const { name, value } = e.target
+        setFormData({
+            ...formData,
+            [name]: value
+        })
+    }
+
+    const handleOnSubmit = async (e) => {
+        e.preventDefault()
+
+        setFormDataError(initialFormError)
+
+        const isSubjectValid = await shortText(formData.subject)
+
+        setFormDataError({
+            ...initialFormError,
+            subject: !isSubjectValid
+        })
+        dispatch(openNewTicket({...formData, sender: name}))
+    }
+
     return (
         <div className="add-new-ticket bg-light" style={{ padding: "2rem 1rem", marginTop: "3rem", borderRadius: "1rem" }}>
             <h1 className="text-info text-center">Add New Ticket</h1>
             <hr />
+            <div>
+                {error && <Alert variant="danger">{error}</Alert>}
+                {successMsg && <Alert variant="success">{successMsg}</Alert>}
+                {isLoading && <Spinner variant="primary" animation="border" />}
+            </div>
             <Container>
                 <Form autoComplete="off" onSubmit={handleOnSubmit}>
                     <Form.Group className="mb-3" as={Row}>
@@ -47,8 +97,8 @@ const AddTicketForm = ({ handleOnSubmit, handleOnChange, formData, formDataError
                         <Form.Label>Details</Form.Label>
                         <Form.Control
                             as="textarea"
-                            value={formData.detail}
-                            name="detail"
+                            value={formData.message}
+                            name="message"
                             rows="5"
                             onChange={handleOnChange}
                             required
@@ -56,7 +106,7 @@ const AddTicketForm = ({ handleOnSubmit, handleOnChange, formData, formDataError
                     </Form.Group>
                     {' '}
                     <div className="d-grid gap-2" >
-                        <Button type="submit" variant="info" className="mt-3" style={{ color: "white" }}>Submit</Button>
+                        <Button type="submit" variant="info" className="mt-3" style={{ color: "white" }}>Open Ticket</Button>
                     </div>
                 </Form>
             </Container>
@@ -65,11 +115,11 @@ const AddTicketForm = ({ handleOnSubmit, handleOnChange, formData, formDataError
     )
 }
 
-AddTicketForm.propTypes = {
-    handleOnSubmit: PropTypes.func.isRequired,
-    handleOnChange: PropTypes.func.isRequired,
-    formData: PropTypes.object.isRequired,
-    formDataError: PropTypes.object.isRequired
-}
+// AddTicketForm.propTypes = {
+//     handleOnSubmit: PropTypes.func.isRequired,
+//     handleOnChange: PropTypes.func.isRequired,
+//     formData: PropTypes.object.isRequired,
+//     formDataError: PropTypes.object.isRequired
+// }
 
 export default AddTicketForm
