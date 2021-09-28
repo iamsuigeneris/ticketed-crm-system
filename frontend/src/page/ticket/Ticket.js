@@ -6,7 +6,8 @@ import PageBreadcrumb from '../../components/breadcrumb/PageBreadcrumb'
 import MessageHistory from '../../components/message-history/MessageHistory'
 import UpdateTicket from '../../components/update-ticket/UpdateTicket'
 import { useParams } from 'react-router-dom'
-import { fetchSingleTicket,closeTicket } from "../ticket-listing/ticketsAction"
+import { fetchSingleTicket, closeTicket } from "../ticket-listing/ticketsAction"
+import { resetResponseMsg}  from "../ticket-listing/ticketSlice"
 
 // const selectedTicket = tickets[0] 
 
@@ -17,7 +18,12 @@ const Ticket = () => {
  
     useEffect(() => {
         dispatch(fetchSingleTicket(tId))
-    }, [tId,dispatch])
+
+        return () => {
+            (replyMsg || replyTicketError) && dispatch(resetResponseMsg())
+        }
+      
+    }, [tId, dispatch, replyMsg, replyTicketError])
     
     return (
         <Container>

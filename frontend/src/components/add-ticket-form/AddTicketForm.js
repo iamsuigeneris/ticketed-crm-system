@@ -3,6 +3,7 @@ import { Container, Button, Row, Col, Form, Spinner,Alert } from 'react-bootstra
 import {useDispatch, useSelector} from 'react-redux'
 import { shortText } from '../../utils/Validation'
 import { openNewTicket } from './addTicketActions'
+import {resetSuccessMsg} from "./addTicketSlice"
 import './addTicketForm.css'
 
 const initialFormData = {
@@ -26,7 +27,11 @@ const AddTicketForm = () => {
     const [formData, setFormData] = useState(initialFormData)
     const [formDataError, setFormDataError] = useState(initialFormError)
 
-    useEffect(() => { }, [formData, formDataError])
+    useEffect(() => { 
+        return () => {
+            successMsg && dispatch(resetSuccessMsg())
+        }
+    }, [formData, formDataError,dispatch])
 
     const handleOnChange = e => {
         const { name, value } = e.target
