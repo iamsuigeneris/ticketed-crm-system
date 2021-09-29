@@ -4,6 +4,7 @@ import './App.css';
 // import DefaultLayout from './layout/DefaultLayout';
 import Dashboard from './page/dashboard/Dashboard';
 import { Entry } from './page/entry/Entry.page';
+import { Registration } from './page/registration/Registration';
 import AddTicket from './page/new-ticket/AddTicket';
 import TicketLists from './page/ticket-listing/TicketLists';
 import Ticket from './page/ticket/Ticket';
@@ -17,6 +18,9 @@ function App() {
         <Switch>
           <Route exact path="/">
             <Entry />
+          </Route> 
+          <Route path="/registration">
+            <Registration />
           </Route> 
      
             <PrivateRoute path="/dashboard">
