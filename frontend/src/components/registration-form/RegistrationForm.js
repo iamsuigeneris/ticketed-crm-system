@@ -1,13 +1,16 @@
 import React,{useState,useEffect} from 'react'
-import { Container, Row, Form, Button, Col } from 'react-bootstrap'
+import { Container, Row, Form, Button, Col,Spinner ,Alert} from 'react-bootstrap'
+import { newUserRegistration } from './userRegAction'
+import {useDispatch,useSelector} from 'react-redux'
 
 const initialState = {
-    name:"",
-    phone:"",
-    email:"",
-    company:"",
-    password:"",
-    confirmPassword:"",
+    name:"Olamide Lawal",
+    phone:"23408111111",
+    email:"olamidelawal@gmail.com",
+    company: "Asmeotech",
+    address:"198 ikorodu road",
+    password:"Password1234$",
+    confirmPassword:"Password1234$",
 }
 const pwdVerificationError = {
     isLengthy: false,
@@ -19,9 +22,11 @@ const pwdVerificationError = {
 }
 
 const RegistrationForm = () => {
+    const dispatch = useDispatch()
     const [newUser, setNewUser] = useState(initialState)
     const [passwordError, setPasswordError] = useState(pwdVerificationError)
 
+    const {isLoading,status,message} = useSelector(state => state.registration)
     useEffect(() => {
 
     }, [newUser])
@@ -50,8 +55,10 @@ const RegistrationForm = () => {
     
     const handleOnSubmit = e => {
         e.preventDefault()
+        // console.log(newUser)
+        dispatch(newUserRegistration(newUser))
     }
-    console.log(newUser)
+    
     return (
         <Container>
             <Row>
@@ -60,6 +67,11 @@ const RegistrationForm = () => {
                 </Col>
             </Row>
             <hr />
+            <Row>
+                <Col>
+                    {message && <Alert variant={status === 'success' ? 'success' : 'danger'}>{message}</Alert>}
+                </Col>
+            </Row>
             <Row>
                 <Col>
                     <Form onSubmit={handleOnSubmit}>
@@ -105,6 +117,8 @@ const RegistrationForm = () => {
                         <Button variant="primary" type="submit" disabled={Object.values(passwordError).includes(false)}>
                             Submit
                         </Button>
+                        {isLoading && <Spinner variant="info" animation="border" />}
+                       
                     </Form>
                 </Col>
             </Row>
