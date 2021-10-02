@@ -31,7 +31,7 @@ const verifyAccessJWT = (userJWT) => {
     try {
         return Promise.resolve(jwt.verify(userJWT, process.env.JWT_ACCESS))
     } catch (error) {
-        return Promise.reject(error)
+        return Promise.resolve(error)
     }
 }
 

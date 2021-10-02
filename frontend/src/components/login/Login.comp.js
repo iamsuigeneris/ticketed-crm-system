@@ -16,8 +16,8 @@ const LoginForm = ({ formSwitcher }) => {
         sessionStorage.getItem("acceessJWT") && history.push("/dashboard")
     }, [history, isAuth])
     
-    const [email, setEmail] = useState("lanre@lanre.com")
-    const [password, setPassword] = useState("password1")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
 
     const handleOnChange = e => {
         const { name, value } = e.target

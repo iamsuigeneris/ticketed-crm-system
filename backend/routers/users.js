@@ -1,16 +1,17 @@
 const express = require("express")
 const router = express.Router()
 
-const { insertUser,getUserEmail,getUserById,updatePassword,storeUserRefreshJWT } = require("../model/user/UserModel")
+const { insertUser, getUserEmail, getUserById, updatePassword, storeUserRefreshJWT, verifyUser } = require("../model/user/UserModel")
 const { hashPassword,comparePassword } = require("../helpers/bcrypt")
 const { createRefreshJWT, createAccessJWT } = require("../helpers/jwt")
 const { userAuthorization } = require("../middlewares/authorization")
 const { setPasswordResetPin, getPinByEmailPin,deletePin } = require("../model/resetPin/ResetPinModel")
 const { emailProcessor } = require("../helpers/email")
-const { resetPassReqValidation, updatePasswordValidation } = require("../middlewares/formValidation")
+const { resetPassReqValidation, updatePasswordValidation, newUserValidation } = require("../middlewares/formValidation")
 const { verify } = require("jsonwebtoken")
-const {deleteJWT} = require("../helpers/redis")
+const { deleteJWT } = require("../helpers/redis")
 
+const verificationURL = "http://localhost:3000/verification/"
 
 router.all("/", (req, res, next) => {
     // res.json({ message: "return from user router" })
@@ -26,8 +27,31 @@ router.get("/", userAuthorization, async (req, res) => {
     res.json({ user: {_id,name,email}})
 })
  
+// verify user after user is sign up
+router.patch("/verify", async (req, res) => {
+    try {
+        // this data from DB
+        const { _id, email } = req.body
+        const result = await verifyUser(_id, email)
+        if (result && result.id) {
+            return res.json({
+                status: 'success',
+                message: 'Your account has been activated, you may sign in now.'
+            })
+        }
+        return res.json({
+            status: 'error',
+            message: 'Invalid request'
+        })
+    } catch (error) {
+        res.json({ status: 'error', message: error.message })
+    }
+
+
+})
+
 // Create New user
-router.post("/", async (req, res) => {
+router.post("/", newUserValidation, async (req, res) => {
     const {name,company,address,phone,email,password} = req.body
     try {
         //hash password
@@ -37,6 +61,12 @@ router.post("/", async (req, res) => {
         }
         const result = await insertUser(newUserObj)
         console.log(result)
+        // send the confirmation email
+        await emailProcessor({
+            email,
+            type: "new-user-confirmation-required",
+            verificationLink: verificationURL + result._id + '/' + email
+        })
  
         res.json({ status:"success", message: "New User Created", result })
     } catch (error) {
@@ -61,6 +91,13 @@ router.post("/login", async(req, res) => {
     }
     // get the password  from db
     const user = await getUserEmail(email)
+
+    if (!user.isVerified) {
+        return res.json({
+            status: "error",
+            message: "Your account has not been verified.Please check your email and verify your account to be able to login"
+        })
+    }
 
     const passFromDb = user && user._id ? user.password : null
 

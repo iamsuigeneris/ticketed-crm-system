@@ -6,6 +6,7 @@ import Dashboard from './page/dashboard/Dashboard';
 import { Entry } from './page/entry/Entry.page';
 import { Registration } from './page/registration/Registration';
 import AddTicket from './page/new-ticket/AddTicket';
+import { UserVerification} from './page/user-verification/UserVerification'
 import TicketLists from './page/ticket-listing/TicketLists';
 import Ticket from './page/ticket/Ticket';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
@@ -21,6 +22,9 @@ function App() {
           </Route> 
           <Route path="/registration">
             <Registration />
+          </Route> 
+          <Route path="/verification/:_id/:email">
+            <UserVerification />
           </Route> 
      
             <PrivateRoute path="/dashboard">

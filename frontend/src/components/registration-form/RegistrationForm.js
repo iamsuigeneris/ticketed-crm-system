@@ -4,13 +4,13 @@ import { newUserRegistration } from './userRegAction'
 import {useDispatch,useSelector} from 'react-redux'
 
 const initialState = {
-    name:"Olamide Lawal",
-    phone:"23408111111",
-    email:"olamidelawal@gmail.com",
-    company: "Asmeotech",
-    address:"198 ikorodu road",
-    password:"Password1234$",
-    confirmPassword:"Password1234$",
+    name:"",
+    phone:"",
+    email:"",
+    company: "",
+    address:"",
+    password:"",
+    confirmPassword:"",
 }
 const pwdVerificationError = {
     isLengthy: false,
@@ -56,7 +56,12 @@ const RegistrationForm = () => {
     const handleOnSubmit = e => {
         e.preventDefault()
         // console.log(newUser)
-        dispatch(newUserRegistration(newUser))
+        const { name, phone, email, company, address, password } = newUser
+        
+        const newRegistration = {
+            name, phone, email, company, address, password 
+        }
+        dispatch(newUserRegistration(newRegistration))
     }
     
     return (
