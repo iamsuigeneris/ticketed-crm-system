@@ -10,14 +10,11 @@ const shortStr = Joi.string().min(2).max(50)
 const longStr = Joi.string().min(2).max(1000)
 const date = Joi.date()
 
-const newPassword = Joi.string()
-    .alphanum()
-    .min(3)
-    .max(30)
-    .required()
+const newPassword = Joi.string().min(3).max(30).required()
 
 const updatePasswordValidation = (req, res, next) => {
-    const schema = Joi.object({ email,pin,newPassword })
+    const schema = Joi.object({ email, pin, newPassword })
+    
     const value = schema.validate(req.body)
     if (value.error) {
         return res.json({status:"error",message:value.error.message})

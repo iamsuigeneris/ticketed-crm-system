@@ -1,15 +1,34 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { Container, Row, Col, Form, Button } from 'react-bootstrap'
+import React, { useState } from 'react'
+import {useDispatch, useSelector} from 'react-redux'
+import { sendPasswordResetOtp} from './passwordAction'
+import { Container, Row, Col, Form, Button, Alert,Spinner } from 'react-bootstrap'
 
-const PasswordReset = ({ handleOnChange, handleOnResetSubmit, email, formSwitcher }) => {
+const PasswordReset = () => {
+    const dispatch = useDispatch()
+    const [email, setEmail] = useState('')
+    const {isLoading,status, message} = useSelector(state => state.password)
 
+    const handleOnResetSubmit = e => {
+        dispatch(sendPasswordResetOtp(email))
+        e.preventDefault()
+    }
+
+    const handleOnChange = e => {
+        const { value } = e.target
+        setEmail(value)
+    }
     return (
         <Container>
             <Row>
                 <Col>
                     <h1 className="text-info text-center">Reset Password</h1>
                     <hr />
+                    {message && (
+                        <Alert variant={status === "success" ? "success" : "danger"}>
+                            {message}
+                        </Alert>
+                    )}
+                    {isLoading && <Spinner variant="primary" animation="border"/>}
                     <Form autoComplete="off" onSubmit={handleOnResetSubmit}>
                         <Form.Group className="mb-3">
                             <Form.Label>Email Address</Form.Label>
@@ -29,20 +48,9 @@ const PasswordReset = ({ handleOnChange, handleOnResetSubmit, email, formSwitche
                     <hr />
                 </Col>
             </Row>
-            <Row>
-                <Col>
-                    <a href="#!" onClick={() => formSwitcher('login')} style={{ textDecoration: "none" }}>Login Now</a>
-                </Col>
-            </Row>
         </Container>
     )
 }
 
-PasswordReset.propTypes = {
-    handleOnChange: PropTypes.func.isRequired,
-    handleOnResetSubmit: PropTypes.func.isRequired,
-    formSwitcher: PropTypes.func.isRequired,
-    email: PropTypes.string.isRequired,
-    
-}
+
 export default PasswordReset

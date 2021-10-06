@@ -9,10 +9,10 @@ router.get("/", async (req, res, next) => {
     const { authorization } = req.headers
     // make sure the token is valid
     const decoded = await verifyRefreshJWT(authorization)
+
     if (decoded.email) {
         const userProf = await getUserEmail(decoded.email)
         if (userProf._id) {
-           
             let tokenExp = userProf.refreshJWT.addedAt
             const dBrefreshToken = userProf.refreshJWT.token
 

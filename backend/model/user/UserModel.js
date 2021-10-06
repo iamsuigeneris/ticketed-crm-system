@@ -1,4 +1,5 @@
-const {UserSchema } = require("./UserSchema")
+const { UserSchema } = require("./UserSchema")
+const {token} = require("morgan")
 
 const insertUser = (userObj) => {
     return new Promise((resolve, reject) => {
@@ -24,7 +25,6 @@ const getUserEmail = (email) => {
         }
     })
 }
-
 
 const getUserById = (_id) => {
     return new Promise((resolve, reject) => {

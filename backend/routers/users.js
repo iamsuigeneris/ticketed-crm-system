@@ -1,4 +1,5 @@
 const express = require("express")
+// const { route, post } = require("./tickets");
 const router = express.Router()
 
 const { insertUser, getUserEmail, getUserById, updatePassword, storeUserRefreshJWT, verifyUser } = require("../model/user/UserModel")
@@ -44,7 +45,9 @@ router.patch("/verify", async (req, res) => {
             message: 'Invalid request'
         })
     } catch (error) {
-        res.json({ status: 'error', message: error.message })
+        return res.json({
+            status: 'error',
+            message: 'Invalid request' })
     }
 
 
@@ -81,7 +84,7 @@ router.post("/", newUserValidation, async (req, res) => {
 })
 
 //User sign in Router
-router.post("/login", async(req, res) => {
+router.post("/login", async (req, res) => {
     console.log(req.body)
     const { email, password } = req.body
  
@@ -114,12 +117,10 @@ router.post("/login", async(req, res) => {
 
     res.json({
         status: "success",
-        message: "Login Successful!",
+        message: "Login Successfully!",
         accessJWT,
         refreshJWT
     })
-
-  
 })
 
 router.post('/reset-password', resetPassReqValidation, async (req, res) => {
@@ -135,11 +136,10 @@ router.post('/reset-password', resetPassReqValidation, async (req, res) => {
             type: "request-new-password"
         })
     }
-
-    return res.json({
+    res.json({
         status: "success",
         message:
-        "If the email exist in the our database, the password reset pin will be sent shortly"
+        "If the email exist in our database, the password reset pin will be sent shortly"
     })
 })
     

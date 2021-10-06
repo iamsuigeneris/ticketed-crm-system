@@ -24,8 +24,6 @@ const UpdateTicket = ({ _id }) => {
     }
     return (
         <div>
-         
-         
         <Form onSubmit={handleOnSubmit}>
             <Form.Label>Reply</Form.Label>
             <Form.Text> Please reply your message here or update your ticket</Form.Text>

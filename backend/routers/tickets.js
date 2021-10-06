@@ -68,7 +68,7 @@ router.get("/", userAuthorization, async (req, res) => {
     }
 })
 
-// Get a particular ticket
+// Get all tickets for a particular user
 router.get("/:_id", userAuthorization, async (req, res) => {
  
     try {
@@ -78,8 +78,7 @@ router.get("/:_id", userAuthorization, async (req, res) => {
 
         const result = await getTicketById(_id, clientId)
 
-        console.log(result)
-            res.json({
+        return res.json({
                 status: "success",
                 result
             })
@@ -136,7 +135,7 @@ router.patch("/close-ticket/:_id", userAuthorization, async (req, res) => {
         }
         res.json({
             status: "error",
-            message: "Unable to close ticket"
+            message: "Unable to update ticket"
         })
     } catch (error) {
         res.json({

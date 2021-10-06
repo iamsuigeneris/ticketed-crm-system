@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react'
 import PropTypes from 'prop-types'
 import { Container, Row, Col, Form, Button, Spinner,Alert } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import {useHistory} from "react-router-dom"
+import {useHistory,useLocation} from "react-router-dom"
 import { loginPending, loginSuccess, loginFail } from './loginSlice'
 import { userLogin } from '../../api/userApi'
 import { getUserProfile } from "../../page/dashboard/userAction"
@@ -10,10 +10,12 @@ import { getUserProfile } from "../../page/dashboard/userAction"
 const LoginForm = ({ formSwitcher }) => {
     const dispatch = useDispatch()
     const history = useHistory()
-    const { isLoading,isAuth,error } = useSelector(state => state.login)
+    const location = useLocation()
+    const { isLoading, isAuth, error } = useSelector(state => state.login)
+    let { from } = location.state || { from: { pathname: "/" }}
     
     useEffect(() => {
-        sessionStorage.getItem("acceessJWT") && history.push("/dashboard")
+        sessionStorage.getItem("accessJWT") && history.replace(from)
     }, [history, isAuth])
     
     const [email, setEmail] = useState("")
@@ -95,13 +97,13 @@ const LoginForm = ({ formSwitcher }) => {
             </Row>
             <Row> 
                 <Col>
-                    <a href="#!" onClick={() => formSwitcher('reset')} style={{ textDecoration: "none" }}>Forget Password?</a>
+                    <a href="/password-reset" style={{ textDecoration: "none" }}>Forget Password?</a>
                 </Col>
             </Row>
             <Row className="py-4">
                 <Col>
                     Are you new here?{' '}
-                    <a href="/registration" onClick={() => formSwitcher('reset')} style={{ textDecoration: "none" }}>Register Now</a>
+                    <a href="/registration" style={{ textDecoration: "none" }}>Register Now</a>
                 </Col>
             </Row>
         </Container>

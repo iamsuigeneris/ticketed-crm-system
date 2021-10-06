@@ -77,7 +77,7 @@ export const fetchUser = () => {
             resolve(res.data)
         } catch (error) {
             console.log(error)
-            reject(error)
+            reject(error.message)
         }
     })
 }

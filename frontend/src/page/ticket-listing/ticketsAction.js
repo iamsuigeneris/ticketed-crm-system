@@ -57,7 +57,7 @@ export const closeTicket = (_id) => async (dispatch) => {
         }
         dispatch(fetchSingleTicket(_id))
 
-        dispatch(closeTicketSuccess(result.message))
+        dispatch(closeTicketSuccess("Status Updated successfully"))
     } catch (error) {
         console.log(error.message)
         dispatch(closeTicketFail(error.message))
